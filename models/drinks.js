@@ -19,7 +19,7 @@ const drinkSchema = new Schema({
 		type: String,
 		required: true
 	},
-	promoted:{
+	recommended:{
 		type: Boolean,
 		default:false
 	}
