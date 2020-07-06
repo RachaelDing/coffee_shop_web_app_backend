@@ -73,7 +73,7 @@ router.route('/:drinkId')
 	if (req.body != null) {
 		try {
 			drink = await Drinks.findByIdAndUpdate(req.params.drinkId,{
-			              $set: req.body}, {new:true})
+			              $set: req.body}, {new : false})
 			res.statusCode = 200;
 			res.setHeader('Content-Type', 'application/json');
 			res.json(drink);  
