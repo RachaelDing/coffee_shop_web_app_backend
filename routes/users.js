@@ -103,10 +103,12 @@ router.route('/:userId')
 .delete(cors.corsWithOptions, authenticate.checkUser, authenticate.checkAdmin, async (req, res, next) =>{
 	try {
 		user = await Users.findByIdAndRemove(req.params.userId);
-		res.statusCode = 200;
-		res.setHeader('Content-Type', 'application/json');
-		res.json(user);
-		console.log('The user: '+user+' has been deleted');  	 	
+		if (user){
+			res.statusCode = 200;
+			res.setHeader('Content-Type', 'application/json');
+			res.json(user);
+			console.log('The user: '+user+' has been deleted');
+		}  	 	
 	} 
 	catch(err){
 		next(err);

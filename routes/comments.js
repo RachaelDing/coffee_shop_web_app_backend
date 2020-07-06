@@ -107,26 +107,13 @@ router.route('/:commentId')
 })
 .delete(cors.corsWithOptions, authenticate.checkUser, authenticate.checkAdmin, async (req, res, next) =>{
 	try {
-		cmt = await Comments.findById(req.params.commentId);
-		if(cmt != null){
-			if(!cmt.author.equals(req.user._id)) {
-				err = new Error('You can not delete others\' comments.');
-				err.status = 403;
-				next(err);
-			}
-			cmt = await Comments.findByIdAndRemove(req.params.commentId)
-			.then((cmt) => {
-				res.statusCode = 200;
-				res.setHeader('Content-Type', 'application/json');
-				res.json(cmt);  
-				console.log('The comment: '+cmt+' has been deleted');  						
-			}, (err) => next(err));
-		}	
-		else {
-            err = new Error('Comment '+req.params.commentId+' does not exist.');
-            err.status = 404;
-            next(err);
-		}	
+		cmt = await Comments.findByIdAndRemove(req.params.commentId)
+		if (cmt) {
+			res.statusCode = 200;
+			res.setHeader('Content-Type', 'application/json');
+			res.json(cmt);  
+			console.log('The comment: '+cmt+' has been deleted');  						
+		}
 	} 
 	catch(err){
 		next(err);
