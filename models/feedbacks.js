@@ -21,6 +21,14 @@ const feedbackSchema = new Schema({
 	message:{
 		type: String,
 		default: ''
+	},
+	viaEmail:{
+		type: Boolean,
+		default:false
+	},
+	viaPhone:{
+		type: Boolean,
+		default:false
 	}
 },{
 	tiemstamps:{}
