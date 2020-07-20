@@ -12,7 +12,7 @@ router.use(bodyParser.json());
 router.options('*', cors.corsWithOptions, (req,res) => {res.sendStatus(200);})
 
 router.route('/')
-.get( async (req, res, next) =>{
+.get(cors.cors, async (req, res, next) =>{
 	try{
 		drinks = await Drinks.find(req.query).populate('comments.author');
 		res.statusCode = 200;

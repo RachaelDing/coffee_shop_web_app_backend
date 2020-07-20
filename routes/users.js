@@ -51,7 +51,7 @@ router.post('/', cors.corsWithOptions, authenticate.checkUser, authenticate.chec
     });
 });
 
-router.post('/signup',  async (req, res, next) =>{
+router.post('/signup', cors.corsWithOptions, async (req, res, next) =>{
     Users.register(new Users({username: req.body.username}), 
     req.body.password, async (err,user) => {
     	if(err) { next(err); }
